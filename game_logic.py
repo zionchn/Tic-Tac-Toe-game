@@ -53,32 +53,42 @@ def switch_player(current_player):
 
 # This function plays the game, will call at the end to run it
 def play_game():
-    board = create_board()
-
-    current_player = "X"
-
     while True:
-        display_board(board)
-        print(f"\nPlayer {current_player}'s turn")
-        position = int(input("Choose a position (0-8): "))
-        if make_move(board, position, current_player):
-            print("Move successful")
-        else:
-            print("Invalid move. Try again.")
-            continue
+        board = create_board()
 
-        winner = check_winner(board)
-        if winner:
+        current_player = "X"
+
+        while True:
             display_board(board)
-            print(f"Player {winner} wins!")
-            break
+            print(f"\nPlayer {current_player}'s turn")
+            try:
+                position = int(input("Choose a position (0-8): "))
+            except ValueError:
+                print("Please enter a valid number!")
+                continue
+            if make_move(board, position, current_player):
+                print("Move successful")
+            else:
+                print("Invalid move. Try again.")
+                continue
 
-        if check_draw(board):
-            display_board(board)
-            print("It's a draw!")
-            break
+            winner = check_winner(board)
+            if winner:
+                display_board(board)
+                print(f"Player {winner} wins!")
+                break
 
-        current_player = switch_player(current_player)
+            if check_draw(board):
+                display_board(board)
+                print("It's a draw!")
+                break
+
+            current_player = switch_player(current_player)
+
+        replay = input("\nPlay again? (yes/no): ").lower()
+        if replay != "yes":
+            print("Thanks for playing!")
+            break
 
 
 # Run the game
