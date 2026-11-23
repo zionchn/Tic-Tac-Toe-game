@@ -1,0 +1,176 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+h1 {
+    color: #F47174;
+    font-size: 42px;
+}
+
+.subtitle {
+    color: #aaa;
+}
+
+.mode-selection {
+    margin: 40px 0;
+}
+
+button {
+    background-color: #ffffff;
+    color: #121212;
+    border: none;
+    padding: 12px 20px;
+    margin: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #242424;
+    border: 1px solid #444;
+    border-radius: 10px;
+}
+
+#status-message {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 25px;
+    color: #F47174;
+    /* It's in a grid so i'll force align */
+    grid-column: 1 / -1;
+}
+
+
+/* Difficulty button */
+.difficulty-container {
+    margin-top: 20px;
+}
+
+.difficulty-container label {
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.difficulty-container select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background-color: #242424;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* Light theme */
+
+body.light-theme {
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+body.light-theme .subtitle {
+    color: #666;
+}
+
+body.light-theme .cell {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #222;
+}
+
+body.light-theme #status-message {
+    color: #007bff;
+}
+
+body.light-theme .scoreboard {
+    background-color: #fff;
+    color: #222;
+}
+
+body.light-theme .difficulty-container select {
+    background-color: white;
+    color: #222;
+    border-color: #ccc;
+}
+
+
+.cell {
+    font-size: 45px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.cell:hover {
+    background-color: #353535;
+}
+
+body.light-theme .cell:hover {
+    background-color: #e5e5e5;
+}
+
+/* Animation when X or O appears */
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cell.animate {
+    animation: popIn 0.2s ease;
+}
+
+
+/* Winning squares */
+.cell.winner {
+    background-color: #16a34a;
+    color: white;
+    border-color: #16a34a;
+    animation: winnerPulse 0.6s ease infinite alternate;
+}
+
+@keyframes winnerPulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.06);
+    }
+}

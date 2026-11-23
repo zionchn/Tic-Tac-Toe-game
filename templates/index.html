@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Tic Tac Toe</h1>
+        <p class="subtitle">The best strategist wins it all!</p>
+        <button id="theme-toggle">☀️ Light Mode</button>
+
+        <div class="mode-selection">
+            <h2>Choose your game mode</h2>
+
+            <button id="pvp-btn">Player vs Player</button>
+            <button id="computer-btn">Player vs Computer</button>
+        </div>
+        <div class="difficulty-container">
+            <label for="difficulty">Difficulty:</label>
+        
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+            </select>
+        </div>
+
+        <!--Game board-->
+        <div class="game-board">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+            <!--Score board-->
+            <div class="scoreboard">
+                <h2>Scoreboard</h2>
+            
+                <div class="scores">
+                    <p>Player X: <span id="x-score">0</span></p>
+                    <p>Player O: <span id="o-score">0</span></p>
+                    <p>Draws: <span id="draw-score">0</span></p>
+                </div>
+            </div>
+        </div>
+        <p id="status-message">Player X's turn</p>
+        <button id="restart-btn">Restart Game</button>
+
+    </div>
+
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
