@@ -78,23 +78,65 @@ def get_medium_move(board):
     return get_random_move(board)
 
 
-# Some test stuff again, not important
-# if __name__ == "__main__":
+# adding the minimax function for final boss difficulty. This function plays a move, checks for possible outcomes,
+# Then unplays the move, plays another one, and checks for the possible outcomes. It chooses the best result.
+def minimax(board, is_maximizing):
 
-#     board1 = [
-#         "O", "O", "",
-#         "X", "X", "",
-#         "", "", ""
-#     ]
+    if check_winner(board, "O"):
+        return 10
 
-#     print("Test 1:", get_medium_move(board1))
+    if check_winner(board, "X"):
+        return -10
 
+    if "" not in board:
+        return 0
 
-#     board2 = [
-#         "X", "X", "",
-#         "O", "", "",
-#         "", "O", ""
-#     ]
+    if is_maximizing:
+        best_score = float("-inf")
 
-#     print("Test 2:", get_medium_move(board2))
-            
+        for position in range(9):
+            if board[position] == "":
+                board[position] = "O"
+
+                score = minimax(board, False)
+
+                board[position] = ""
+
+                best_score = max(score, best_score)
+
+        return best_score
+
+    else:
+        best_score = float("inf")
+
+        for position in range(9):
+            if board[position] == "":
+                board[position] = "X"
+
+                score = minimax(board, True)
+
+                board[position] = ""
+
+                best_score = min(score, best_score)
+
+        return best_score
+    
+
+# This takes the result from minimax and picks a position based off it
+def get_best_move(board):
+    best_score = float("-inf")
+    best_move = None
+
+    for position in range(9):
+        if board[position] == "":
+            board[position] = "O"
+
+            score = minimax(board, False)
+
+            board[position] = ""
+
+            if score > best_score:
+                best_score = score
+                best_move = position
+
+    return best_move

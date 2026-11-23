@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from ai import get_random_move, get_medium_move
+from ai import get_random_move, get_medium_move, get_best_move
 
 app = Flask(__name__)
 
@@ -24,8 +24,12 @@ def computer_move():
 
     difficulty = data.get("difficulty", "easy")
 
-    if difficulty == "medium":
+    if difficulty == "impossible":
+        move = get_best_move(board)
+
+    elif difficulty == "medium":
         move = get_medium_move(board)
+
     else:
         move = get_random_move(board)
 
